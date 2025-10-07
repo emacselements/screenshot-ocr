@@ -1,5 +1,5 @@
 #!/bin/sh
-# Author: Raoul Comninos
+
 # Define filenames
 screenshot="/tmp/screenshot.png"
 text_output="/tmp/recognized_text"
