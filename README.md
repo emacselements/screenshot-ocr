@@ -13,6 +13,7 @@ A simple bash script that captures a screenshot of a selected screen region and 
 - 📸 Interactive region selection for screenshots
 - 🔍 Text extraction using Tesseract OCR
 - 📋 Automatic clipboard copying
+- 📄 Creates searchable OCR'd PDF of captured region
 - 🖥️ Cross-platform compatibility (Linux/Unix systems)
 - ⚡ Lightweight and fast
 
@@ -70,6 +71,7 @@ brew install tesseract
    - Process it with Tesseract OCR
    - Display the recognized text in the terminal
    - Copy the text to your clipboard (if xclip is available)
+   - Create a searchable OCR'd PDF in `~/Desktop/ocr-screenshots/`
 
 ## How It Works
 
@@ -77,12 +79,16 @@ brew install tesseract
 2. **OCR Processing**: Processes the screenshot with `tesseract` to extract text
 3. **Output Display**: Shows the recognized text in the terminal
 4. **Clipboard Integration**: Automatically copies the text to clipboard using `xclip`
+5. **PDF Creation**: Generates a searchable PDF with embedded OCR text layer
 
 ## File Locations
 
-The script uses temporary files that are automatically cleaned up:
+Temporary files (automatically cleaned up):
 - Screenshot: `/tmp/screenshot.png`
 - OCR output: `/tmp/recognized_text.txt`
+
+Output files:
+- OCR'd PDFs: `~/Desktop/ocr-screenshots/screenshot_ocr_YYYYMMDD_HHMMSS.pdf`
 
 ## Troubleshooting
 
@@ -102,10 +108,16 @@ The script uses temporary files that are automatically cleaned up:
 - Install `xclip`: `sudo apt install xclip`
 - Ensure you're running in a graphical environment with clipboard support
 
+### PDF creation fails
+- Ensure Tesseract is installed with PDF support (most modern versions include this)
+- Check that you have write permissions to `~/Desktop/ocr-screenshots/`
+- Verify the directory exists (the script creates it automatically)
+
 ## Customization
 
 You can modify the script to:
 - Change temporary file locations
+- Change PDF output directory (default: `~/Desktop/ocr-screenshots/`)
 - Add different OCR languages
 - Adjust Tesseract parameters for better accuracy
 - Add support for different clipboard managers
