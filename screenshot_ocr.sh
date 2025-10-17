@@ -1,14 +1,9 @@
-#!/bin/sh
+q#!/bin/sh
 # Author: Raoul Comninos
-# Description: Take a screenshot of a selected region, perform OCR on it, display the text, copy it to clipboard, and create an OCR'd PDF.
+# Description: Take a screenshot of a selected region, perform OCR on it, display the text, and copy it to clipboard.
 # Define filenames
 screenshot="/tmp/screenshot.png"
 text_output="/tmp/recognized_text"
-ocr_dir="${HOME}/Desktop/ocr-screenshots"
-pdf_output="${ocr_dir}/screenshot_ocr_$(date +%Y%m%d_%H%M%S).pdf"
-
-# Create output directory if it doesn't exist
-mkdir -p "$ocr_dir"
 
 # Take a screenshot with region selection
 echo "Taking screenshot. Please select a region..."
@@ -40,16 +35,6 @@ if command -v xclip >/dev/null 2>&1; then
     cat "${text_output}.txt" | xclip -selection clipboard
 else
     echo "xclip not found. Please install xclip."
-fi
-
-# Create OCR'd PDF (requires tesseract with PDF output support)
-echo "Creating OCR'd PDF..."
-tesseract "$screenshot" "${pdf_output%.pdf}" pdf
-
-if [ -f "$pdf_output" ]; then
-    echo "PDF created successfully: $pdf_output"
-else
-    echo "PDF creation failed."
 fi
 
 echo "Script finished."
